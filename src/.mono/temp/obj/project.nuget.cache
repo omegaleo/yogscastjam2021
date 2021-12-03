@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "NueFjJFpX3ZM3z/9Q51T8vsTgpmJRiD6zYKaqXYGEoou4wNIbCy+mCenNr46dYIfU/yyuFbVd3VY7dpiHf6KSw==",
+  "success": true,
+  "projectFilePath": "/home/omegaleo/Desktop/GitHub/yogscastjam2021/src/GoodAndEvil.csproj",
+  "expectedPackageFiles": [
+    "/home/omegaleo/.nuget/packages/microsoft.netframework.referenceassemblies/1.0.2/microsoft.netframework.referenceassemblies.1.0.2.nupkg.sha512",
+    "/home/omegaleo/.nuget/packages/microsoft.netframework.referenceassemblies.net472/1.0.2/microsoft.netframework.referenceassemblies.net472.1.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}

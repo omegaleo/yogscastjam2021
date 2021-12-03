@@ -1,0 +1,9 @@
+/home/omegaleo/Desktop/GitHub/yogscastjam2021/src/.mono/temp/bin/Debug/GoodAndEvil.dll
+/home/omegaleo/Desktop/GitHub/yogscastjam2021/src/.mono/temp/bin/Debug/GoodAndEvil.pdb
+/home/omegaleo/Desktop/GitHub/yogscastjam2021/src/.mono/temp/obj/Debug/GoodAndEvil.csproj.AssemblyReference.cache
+/home/omegaleo/Desktop/GitHub/yogscastjam2021/src/.mono/temp/obj/Debug/GoodAndEvil.GeneratedMSBuildEditorConfig.editorconfig
+/home/omegaleo/Desktop/GitHub/yogscastjam2021/src/.mono/temp/obj/Debug/GoodAndEvil.AssemblyInfoInputs.cache
+/home/omegaleo/Desktop/GitHub/yogscastjam2021/src/.mono/temp/obj/Debug/GoodAndEvil.AssemblyInfo.cs
+/home/omegaleo/Desktop/GitHub/yogscastjam2021/src/.mono/temp/obj/Debug/GoodAndEvil.csproj.CoreCompileInputs.cache
+/home/omegaleo/Desktop/GitHub/yogscastjam2021/src/.mono/temp/obj/Debug/GoodAndEvil.dll
+/home/omegaleo/Desktop/GitHub/yogscastjam2021/src/.mono/temp/obj/Debug/GoodAndEvil.pdb
