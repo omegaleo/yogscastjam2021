@@ -35,6 +35,11 @@ public class ToggleMap : Node2D
 				{
 					((RigidBody2D) child).GetNode<CollisionShape2D>("Collision").Disabled = true;
 				}
+
+				if (child is StaticBody2D)
+				{
+					((StaticBody2D) child).GetNode<CollisionPolygon2D>("Collision").Disabled = true;
+				}
 			}
 		}
 		else
@@ -44,6 +49,11 @@ public class ToggleMap : Node2D
 				if (child is RigidBody2D)
 				{
 					((RigidBody2D) child).GetNode<CollisionShape2D>("Collision").Disabled = false;
+				}
+				
+				if (child is StaticBody2D)
+				{
+					((StaticBody2D) child).GetNode<CollisionPolygon2D>("Collision").Disabled = false;
 				}
 			}
 		}

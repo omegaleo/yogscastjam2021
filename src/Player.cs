@@ -8,11 +8,21 @@ public class Player : KinematicBody2D
 	[Export] public int goodKeys = 0;
 	[Export] public int badKeys = 0;
 	[Export] public int jaffaCakes = 0;
+
+	[Export] public Vector2 respawnPoint;
 	
 	public Vector2 velocity = new Vector2();
 
 	public int hearts = 3;
-	
+
+	public override void _Ready()
+	{
+		base._Ready();
+
+		respawnPoint = GlobalPosition;
+	}
+
+
 	public void GetInput()
 	{
 		velocity = new Vector2();
@@ -33,6 +43,7 @@ public class Player : KinematicBody2D
 	}
 
 	private bool messageSent = false;
+	private bool waitingToRespawn = false;
 	
 	public override void _PhysicsProcess(float delta)
 	{
@@ -57,7 +68,20 @@ public class Player : KinematicBody2D
 					UI.dialogue.ShowSecondTutorialText();
 					messageSent = true;
 				}
-				else if (collisionName.Contains("Key"))
+
+				if (collisionName.Equals("JaffaCake"))
+				{
+					jaffaCakes++;
+					((Node) collision.Collider).QueueFree();
+				}
+				
+				if (collisionName.Equals("RespawnPoint"))
+				{
+					respawnPoint = GlobalPosition;
+					((Node) collision.Collider).QueueFree();
+				}
+				
+				if (collisionName.Contains("Key"))
 				{
 					if (collisionName.Contains("Bad"))
 					{
@@ -70,12 +94,14 @@ public class Player : KinematicBody2D
 						((Node) collision.Collider).QueueFree();
 					}
 				}
-				else if (collisionName.Contains("Door"))
+				
+				if (collisionName.Contains("Door"))
 				{
 					if (collisionName.Contains("Bad") && badKeys > 0)
 					{
 						badKeys--;
 						((Node) collision.Collider).QueueFree();
+						respawnPoint = GlobalPosition;
 					}
 					else if (collisionName.Contains("Bad") && !messageSent)
 					{
@@ -87,12 +113,21 @@ public class Player : KinematicBody2D
 					{
 						goodKeys--;
 						((Node) collision.Collider).QueueFree();
+						respawnPoint = GlobalPosition;
 					}
 					else if (collisionName.Contains("Good") && !messageSent)
 					{
 						UI.dialogue.ShowLockedGoodDoorText();
 						messageSent = true;
 					}
+				}
+
+				if (collisionName.Contains("Death") && !waitingToRespawn)
+				{
+					hearts--;
+					waitingToRespawn = true;
+					GlobalPosition = respawnPoint;
+					waitingToRespawn = false;
 				}
 			}
 			else
