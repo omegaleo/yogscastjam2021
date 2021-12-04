@@ -5,8 +5,9 @@ public class Player : KinematicBody2D
 {
 	[Export] public int speed = 200;
 
-	public int goodKeys = 0;
-	public int badKeys = 0;
+	[Export] public int goodKeys = 0;
+	[Export] public int badKeys = 0;
+	[Export] public int jaffaCakes = 0;
 	
 	public Vector2 velocity = new Vector2();
 

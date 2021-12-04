@@ -14,6 +14,7 @@ wonder where the key might be[/center]
         public const string heartBBCode = "[img=32x32]textures/gui/heart.png[/img]";
         public const string goodKeyBBCode = "[img=16x16]textures/gui/goodKey.png[/img]";
         public const string badKeyBBCode = "[img=16x16]textures/gui/badKey.png[/img]";
+        public const string jaffaBBCode = "[img=16x16]textures/JaffaCake.png[/img]";
 
         public const string badDoorLockedText = @"[center]Door is locked!
 Requires " + badKeyBBCode + @"x1 to open.
