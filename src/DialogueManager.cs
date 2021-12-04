@@ -41,6 +41,16 @@ public class DialogueManager : Control
 		ShowDialogue(Constants.tutorialSecondText);
 	}
 	
+	public void ShowLockedGoodDoorText()
+	{
+		ShowDialogue(Constants.goodDoorLockedText);
+	}
+	
+	public void ShowLockedBadDoorText()
+	{
+		ShowDialogue(Constants.badDoorLockedText);
+	}
+	
 	public void ShowDialogue(string text)
 	{
 		_popup.Popup_();

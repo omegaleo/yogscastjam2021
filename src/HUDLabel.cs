@@ -26,8 +26,8 @@ public class HUDLabel : RichTextLabel
 		}
 
 		hud += System.Environment.NewLine;
-		hud += $"{Constants.goodKeyBBCode} x{GameStart.player.goodKeys}";
-		hud += $"{Constants.badKeyBBCode} x{GameStart.player.badKeys}";
+		hud += $"{Constants.goodKeyBBCode}x{GameStart.player.goodKeys}";
+		hud += $"{Constants.badKeyBBCode}x{GameStart.player.badKeys}";
 		
 		
 		BbcodeText = hud;

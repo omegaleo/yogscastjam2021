@@ -76,10 +76,21 @@ public class Player : KinematicBody2D
 						badKeys--;
 						((Node) collision.Collider).QueueFree();
 					}
-					else if (collisionName.Contains("Good") && goodKeys > 0)
+					else if (collisionName.Contains("Bad") && !messageSent)
+					{
+						UI.dialogue.ShowLockedBadDoorText();
+						messageSent = true;
+					}
+					
+					if (collisionName.Contains("Good") && goodKeys > 0)
 					{
 						goodKeys--;
 						((Node) collision.Collider).QueueFree();
+					}
+					else if (collisionName.Contains("Good") && !messageSent)
+					{
+						UI.dialogue.ShowLockedGoodDoorText();
+						messageSent = true;
 					}
 				}
 			}
