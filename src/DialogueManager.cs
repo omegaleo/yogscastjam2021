@@ -19,6 +19,11 @@ public class DialogueManager : Control
 			
 	}
 
+	public bool IsPopupOpen
+	{
+		get { return _popup.Visible; }
+	}
+	
 	public override void _Ready()
 	{
 		base._Ready();

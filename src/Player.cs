@@ -30,24 +30,27 @@ public class Player : KinematicBody2D
 	
 	public override void _PhysicsProcess(float delta)
 	{
-		GetInput();
-		velocity = MoveAndSlide(velocity);
+		if (!UI.dialogue.IsPopupOpen)
+		{
+			GetInput();
+			velocity = MoveAndSlide(velocity);
 		
-		var collision = GetLastSlideCollision();
+			var collision = GetLastSlideCollision();
 
-		if (collision != null)
-		{
-			string collisionName = ((Node) collision.Collider).Name;
-
-			if (collisionName.Equals("StartingSign") && !messageSent)
+			if (collision != null)
 			{
-				UI.dialogue.ShowTutorialText();
-				messageSent = true;
+				string collisionName = ((Node) collision.Collider).Name;
+
+				if (collisionName.Equals("StartingSign") && !messageSent)
+				{
+					UI.dialogue.ShowTutorialText();
+					messageSent = true;
+				}
 			}
-		}
-		else
-		{
-			messageSent = false;
+			else
+			{
+				messageSent = false;
+			}
 		}
 	}
 }

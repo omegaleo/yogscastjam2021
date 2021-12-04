@@ -7,12 +7,15 @@ public class ToggleMap : Node2D
 {
 	public override void _Input(InputEvent inputEvent)
 	{
-		if (inputEvent.IsActionPressed("SwitchMap"))
+		if (!UI.dialogue.IsPopupOpen)
 		{
-			Toggle();
-		}
+			if (inputEvent.IsActionPressed("SwitchMap"))
+			{
+				Toggle();
+			}
 		
-		SetRigidbodies();
+			SetRigidbodies();
+		}
 	}
 
 	void Toggle()
