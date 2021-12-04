@@ -10,5 +10,9 @@ namespace GoodAndEvil
         public const string tutorialSecondText = @"[center]This door appears to be locked,
         wonder where the key might be[/center]
         [right]Press <Z> to Continue[/right]";
+
+        public const string heartBBCode = "[img=32x32]textures/gui/heart.png[/img]";
+        public const string goodKeyBBCode = "[img=16x16]textures/gui/goodKey.png[/img]";
+        public const string badKeyBBCode = "[img=16x16]textures/gui/badKey.png[/img]";
     }
 }

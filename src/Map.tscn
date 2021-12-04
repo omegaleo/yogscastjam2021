@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Player.cs" type="Script" id=1]
 [ext_resource path="res://textures/Player.png" type="Texture" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://textures/tilemaps/LockedDoor.png" type="Texture" id=10]
 [ext_resource path="res://Key.cs" type="Script" id=11]
 [ext_resource path="res://KeyDoor.cs" type="Script" id=12]
+[ext_resource path="res://HUDLabel.cs" type="Script" id=13]
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 26, 14 )
@@ -254,6 +255,25 @@ text = "Tutorial
 To get through this level you need to switch to the opposite room by pressing SPACE
 Press <Z> to Continue"
 scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerHUD" type="Control" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/PlayerHUD"]
+anchor_right = 1.0
+margin_bottom = 92.0
+rect_min_size = Vector2( 0, 32 )
+bbcode_enabled = true
+bbcode_text = "[img=32x32]textures/gui/heart.png[/img]"
+scroll_active = false
+script = ExtResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

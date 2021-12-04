@@ -10,6 +10,8 @@ public class Player : KinematicBody2D
 	
 	public Vector2 velocity = new Vector2();
 
+	public int hearts = 3;
+	
 	public void GetInput()
 	{
 		velocity = new Vector2();
