@@ -5,6 +5,9 @@ public class Player : KinematicBody2D
 {
 	[Export] public int speed = 200;
 
+	public int goodKeys = 0;
+	public int badKeys = 0;
+	
 	public Vector2 velocity = new Vector2();
 
 	public void GetInput()
@@ -45,6 +48,37 @@ public class Player : KinematicBody2D
 				{
 					UI.dialogue.ShowTutorialText();
 					messageSent = true;
+				}
+				if (collisionName.Equals("StartingSign2") && !messageSent)
+				{
+					UI.dialogue.ShowSecondTutorialText();
+					messageSent = true;
+				}
+				else if (collisionName.Contains("Key"))
+				{
+					if (collisionName.Contains("Bad"))
+					{
+						badKeys++;
+						((Node) collision.Collider).QueueFree();
+					}
+					else
+					{
+						goodKeys++;
+						((Node) collision.Collider).QueueFree();
+					}
+				}
+				else if (collisionName.Contains("Door"))
+				{
+					if (collisionName.Contains("Bad") && badKeys > 0)
+					{
+						badKeys--;
+						((Node) collision.Collider).QueueFree();
+					}
+					else if (collisionName.Contains("Good") && goodKeys > 0)
+					{
+						goodKeys--;
+						((Node) collision.Collider).QueueFree();
+					}
 				}
 			}
 			else

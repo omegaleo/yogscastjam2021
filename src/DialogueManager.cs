@@ -36,6 +36,11 @@ public class DialogueManager : Control
 		ShowDialogue(Constants.tutorialText);
 	}
 
+	public void ShowSecondTutorialText()
+	{
+		ShowDialogue(Constants.tutorialSecondText);
+	}
+	
 	public void ShowDialogue(string text)
 	{
 		_popup.Popup_();
