@@ -57,7 +57,7 @@ public class Player : KinematicBody2D
 			if (collision != null)
 			{
 				string collisionName = ((Node) collision.Collider).Name;
-
+				GD.Print(collisionName);
 				if (collisionName.Equals("StartingSign") && !messageSent)
 				{
 					UI.dialogue.ShowTutorialText();
