@@ -31,14 +31,18 @@ public class ToggleMap : Node2D
 		{
 			foreach (var child in GetChildren())
 			{
-				if (child is RigidBody2D)
+				if (child is RigidBody2D || child is StaticBody2D)
 				{
-					((RigidBody2D) child).GetNode<CollisionShape2D>("Collision").Disabled = true;
-				}
-
-				if (child is StaticBody2D)
-				{
-					((StaticBody2D) child).GetNode<CollisionPolygon2D>("Collision").Disabled = true;
+					var collisionNode = ((Node) child).GetNode("Collision");
+					if (collisionNode is CollisionPolygon2D)
+					{
+						((CollisionPolygon2D)collisionNode).Disabled = true;
+					}
+					
+					if (collisionNode is CollisionShape2D)
+					{
+						((CollisionShape2D)collisionNode).Disabled = true;
+					}
 				}
 			}
 		}
@@ -46,14 +50,18 @@ public class ToggleMap : Node2D
 		{
 			foreach (var child in GetChildren())
 			{
-				if (child is RigidBody2D)
+				if (child is RigidBody2D || child is StaticBody2D)
 				{
-					((RigidBody2D) child).GetNode<CollisionShape2D>("Collision").Disabled = false;
-				}
-				
-				if (child is StaticBody2D)
-				{
-					((StaticBody2D) child).GetNode<CollisionPolygon2D>("Collision").Disabled = false;
+					var collisionNode = ((Node) child).GetNode("Collision");
+					if (collisionNode is CollisionPolygon2D)
+					{
+						((CollisionPolygon2D)collisionNode).Disabled = false;
+					}
+					
+					if (collisionNode is CollisionShape2D)
+					{
+						((CollisionShape2D)collisionNode).Disabled = false;
+					}
 				}
 			}
 		}
