@@ -69,13 +69,13 @@ public class Player : KinematicBody2D
 					messageSent = true;
 				}
 
-				if (collisionName.Equals("JaffaCake"))
+				if (collisionName.Contains("JaffaCake"))
 				{
 					jaffaCakes++;
 					((Node) collision.Collider).QueueFree();
 				}
 				
-				if (collisionName.Equals("RespawnPoint"))
+				if (collisionName.Contains("RespawnPoint"))
 				{
 					respawnPoint = GlobalPosition;
 					((Node) collision.Collider).QueueFree();
@@ -128,6 +128,23 @@ public class Player : KinematicBody2D
 					waitingToRespawn = true;
 					GlobalPosition = respawnPoint;
 					waitingToRespawn = false;
+				}
+
+				if (collisionName.Contains("Portal"))
+				{
+					var portal = ((Portal) collision.Collider);
+
+					if (portal != null)
+					{
+						if (portal.teleportToStart)
+						{
+							GlobalPosition = respawnPoint;
+						}
+						else
+						{
+							GlobalPosition = portal.positionToTeleport;
+						}
+					}
 				}
 			}
 			else
