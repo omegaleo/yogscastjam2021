@@ -47,7 +47,7 @@ public class Player : KinematicBody2D
 	
 	public override void _PhysicsProcess(float delta)
 	{
-		if (!UI.dialogue.IsPopupOpen)
+		if (!UI.dialogue.IsPopupOpen && !UI.gameOver.GameOverShowing)
 		{
 			GetInput();
 			velocity = MoveAndSlide(velocity);
@@ -57,7 +57,7 @@ public class Player : KinematicBody2D
 			if (collision != null)
 			{
 				string collisionName = ((Node) collision.Collider).Name;
-				GD.Print(collisionName);
+
 				if (collisionName.Equals("StartingSign") && !messageSent)
 				{
 					UI.dialogue.ShowTutorialText();
@@ -125,9 +125,17 @@ public class Player : KinematicBody2D
 				if (collisionName.Contains("Death") && !waitingToRespawn)
 				{
 					hearts--;
+
 					waitingToRespawn = true;
-					GlobalPosition = respawnPoint;
-					waitingToRespawn = false;
+					if (hearts == 0)
+					{
+						UI.gameOver.ShowGameOver();
+					}
+					else
+					{
+						GlobalPosition = respawnPoint;
+						waitingToRespawn = false;
+					}
 				}
 
 				if (collisionName.Contains("Portal"))

@@ -14,7 +14,7 @@ public class DialogueManager : Control
 
 		if (Input.IsActionPressed("Action"))
 		{
-			GetNode<Popup>("Popup").Hide();
+			_popup.Hide();
 		}
 			
 	}
