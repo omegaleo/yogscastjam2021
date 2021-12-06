@@ -1,5 +1,8 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using GoodAndEvil;
 
 public class Player : KinematicBody2D
 {
@@ -10,15 +13,129 @@ public class Player : KinematicBody2D
 	[Export] public int jaffaCakes = 0;
 
 	[Export] public Vector2 respawnPoint;
-	
+
 	public Vector2 velocity = new Vector2();
 
 	public int hearts = 3;
 
+	public Sprite sprite;
+
+	[Export] public List<AnimationFrame> animationFrames = new List<AnimationFrame>()
+	{
+		new AnimationFrame()
+		{
+			animationName = "IdleDown",
+			frames = new List<FrameCoordinates>()
+			{
+				new FrameCoordinates(0, 0)
+			}
+		},
+		new AnimationFrame()
+		{
+			animationName = "Down",
+			frames = new List<FrameCoordinates>()
+			{
+				new FrameCoordinates(32, 0),
+				new FrameCoordinates(32, 0),
+				new FrameCoordinates(32, 0),
+				new FrameCoordinates(32, 0),
+				new FrameCoordinates(32, 0),
+				new FrameCoordinates(64, 0),
+				new FrameCoordinates(64, 0),
+				new FrameCoordinates(64, 0),
+				new FrameCoordinates(64, 0),
+				new FrameCoordinates(64, 0)
+			}
+		},
+		new AnimationFrame()
+		{
+			animationName = "IdleUp",
+			frames = new List<FrameCoordinates>()
+			{
+				new FrameCoordinates(96, 0)
+			}
+		},
+		new AnimationFrame()
+		{
+			animationName = "Up",
+			frames = new List<FrameCoordinates>()
+			{
+				new FrameCoordinates(0, 32),
+				new FrameCoordinates(0, 32),
+				new FrameCoordinates(0, 32),
+				new FrameCoordinates(0, 32),
+				new FrameCoordinates(0, 32),
+				new FrameCoordinates(32, 32),
+				new FrameCoordinates(32, 32),
+				new FrameCoordinates(32, 32),
+				new FrameCoordinates(32, 32),
+				new FrameCoordinates(32, 32)
+			}
+		},
+		new AnimationFrame()
+		{
+			animationName = "IdleRight",
+			frames = new List<FrameCoordinates>()
+			{
+				new FrameCoordinates(64, 32)
+			}
+		},
+		new AnimationFrame()
+		{
+			animationName = "Right",
+			frames = new List<FrameCoordinates>()
+			{
+				new FrameCoordinates(96, 32),
+				new FrameCoordinates(96, 32),
+				new FrameCoordinates(96, 32),
+				new FrameCoordinates(96, 32),
+				new FrameCoordinates(96, 32),
+				new FrameCoordinates(0, 64),
+				new FrameCoordinates(0, 64),
+				new FrameCoordinates(0, 64),
+				new FrameCoordinates(0, 64),
+				new FrameCoordinates(0, 64)
+			}
+		},
+		new AnimationFrame()
+		{
+			animationName = "IdleLeft",
+			frames = new List<FrameCoordinates>()
+			{
+				new FrameCoordinates(32, 64)
+			}
+		},
+		new AnimationFrame()
+		{
+			animationName = "Left",
+			frames = new List<FrameCoordinates>()
+			{
+				new FrameCoordinates(64, 64),
+				new FrameCoordinates(64, 64),
+				new FrameCoordinates(64, 64),
+				new FrameCoordinates(64, 64),
+				new FrameCoordinates(64, 64),
+				new FrameCoordinates(96, 64),
+				new FrameCoordinates(96, 64),
+				new FrameCoordinates(96, 64),
+				new FrameCoordinates(96, 64),
+				new FrameCoordinates(96, 64)
+			}
+		}
+	};
+
+	public enum Direction {UP,DOWN,LEFT,RIGHT}
+
+	public Direction direction = Direction.UP;
+	
+	
+	public int frame = 0;
+	public int maxFrameCount = 10;
+
 	public override void _Ready()
 	{
 		base._Ready();
-
+		sprite = GetNode<Sprite>("Sprite");
 		respawnPoint = GlobalPosition;
 	}
 
@@ -28,30 +145,132 @@ public class Player : KinematicBody2D
 		velocity = new Vector2();
 
 		if (Input.IsActionPressed("Right"))
+		{
+			if (direction != Direction.RIGHT)
+			{
+				direction = Direction.RIGHT;
+				frame = 0;
+			}
+			
+			var region = animationFrames.Where(x => x.animationName == "Right").FirstOrDefault().frames[frame];
+			sprite.RegionRect = new Rect2(new Vector2(region.x, region.y), new Vector2(32, 32));
+
+			frame++;
+
+			if (frame == maxFrameCount)
+			{
+				frame = 0;
+			}
+			
 			velocity.x += 1;
+		}
+		else if (Input.IsActionPressed("Left"))
+		{
+			if (direction != Direction.LEFT)
+			{
+				direction = Direction.LEFT;
+				frame = 0;
+			}
+			
+			var region = animationFrames.Where(x => x.animationName == "Left").FirstOrDefault().frames[frame];
+			sprite.RegionRect = new Rect2(new Vector2(region.x, region.y), new Vector2(32, 32));
 
-		if (Input.IsActionPressed("Left"))
+			frame++;
+
+			if (frame == maxFrameCount)
+			{
+				frame = 0;
+			}
+			
 			velocity.x -= 1;
+		}
+		else if (Input.IsActionPressed("Down"))
+		{
+			
+			if (direction != Direction.DOWN)
+			{
+				direction = Direction.DOWN;
+				frame = 0;
+			}
+			
+			var region = animationFrames.Where(x => x.animationName == "Down").FirstOrDefault().frames[frame];
+			sprite.RegionRect = new Rect2(new Vector2(region.x, region.y), new Vector2(32, 32));
 
-		if (Input.IsActionPressed("Down"))
+			frame++;
+
+			if (frame == maxFrameCount)
+			{
+				frame = 0;
+			}
+			
 			velocity.y += 1;
+		}
+		else if (Input.IsActionPressed("Up"))
+		{
+			if (direction != Direction.UP)
+			{
+				direction = Direction.UP;
+				frame = 0;
+			}
+			
+			var region = animationFrames.Where(x => x.animationName == "Up").FirstOrDefault().frames[frame];
+			sprite.RegionRect = new Rect2(new Vector2(region.x, region.y), new Vector2(32, 32));
 
-		if (Input.IsActionPressed("Up"))
+			frame++;
+
+			if (frame == maxFrameCount)
+			{
+				frame = 0;
+			}
+			
 			velocity.y -= 1;
+		}
+		else
+		{
+			FrameCoordinates region = new FrameCoordinates(0,0);
+			switch (direction)
+			{
+				case Direction.UP:
+					region = animationFrames.Where(x => x.animationName == "IdleUp").FirstOrDefault().frames[0];
+					sprite.RegionRect = new Rect2(new Vector2(region.x, region.y), new Vector2(32, 32));
+					break;
+				case Direction.DOWN:
+					region = animationFrames.Where(x => x.animationName == "IdleDown").FirstOrDefault().frames[0];
+					sprite.RegionRect = new Rect2(new Vector2(region.x, region.y), new Vector2(32, 32));
+					break;
+				case Direction.LEFT:
+					region = animationFrames.Where(x => x.animationName == "IdleLeft").FirstOrDefault().frames[0];
+					sprite.RegionRect = new Rect2(new Vector2(region.x, region.y), new Vector2(32, 32));
+					break;
+				case Direction.RIGHT:
+					region = animationFrames.Where(x => x.animationName == "IdleRight").FirstOrDefault().frames[0];
+					sprite.RegionRect = new Rect2(new Vector2(region.x, region.y), new Vector2(32, 32));
+					break;
+			}
+		}
 
 		velocity = velocity.Normalized() * speed;
 	}
 
 	private bool messageSent = false;
 	private bool waitingToRespawn = false;
-	
+
 	public override void _PhysicsProcess(float delta)
 	{
+		if (GameStart.good.Visible)
+		{
+			sprite.Texture = GD.Load<Texture>("res://textures/characters/Simon.png");
+		}
+		else
+		{
+			sprite.Texture = GD.Load<Texture>("res://textures/characters/Lewis.png");
+		}
+		
 		if (!UI.dialogue.IsPopupOpen && !UI.gameOver.GameOverShowing)
 		{
 			GetInput();
 			velocity = MoveAndSlide(velocity);
-		
+
 			var collision = GetLastSlideCollision();
 
 			if (collision != null)
@@ -63,6 +282,7 @@ public class Player : KinematicBody2D
 					UI.dialogue.ShowTutorialText();
 					messageSent = true;
 				}
+
 				if (collisionName.Equals("StartingSign2") && !messageSent)
 				{
 					UI.dialogue.ShowSecondTutorialText();
@@ -74,13 +294,13 @@ public class Player : KinematicBody2D
 					jaffaCakes++;
 					((Node) collision.Collider).QueueFree();
 				}
-				
+
 				if (collisionName.Contains("RespawnPoint"))
 				{
 					respawnPoint = GlobalPosition;
 					((Node) collision.Collider).QueueFree();
 				}
-				
+
 				if (collisionName.Contains("Key"))
 				{
 					if (collisionName.Contains("Bad"))
@@ -94,7 +314,7 @@ public class Player : KinematicBody2D
 						((Node) collision.Collider).QueueFree();
 					}
 				}
-				
+
 				if (collisionName.Contains("Door"))
 				{
 					if (collisionName.Contains("Bad") && badKeys > 0)
@@ -108,7 +328,7 @@ public class Player : KinematicBody2D
 						UI.dialogue.ShowLockedBadDoorText();
 						messageSent = true;
 					}
-					
+
 					if (collisionName.Contains("Good") && goodKeys > 0)
 					{
 						goodKeys--;

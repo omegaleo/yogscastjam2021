@@ -26,13 +26,16 @@ public class HUDLabel : RichTextLabel
 		}
 
 		hud += System.Environment.NewLine;
-		hud += $"{Constants.goodKeyBBCode}x{GameStart.player.goodKeys}";
-		hud += $"{Constants.badKeyBBCode}x{GameStart.player.badKeys}";
+		
+		hud += $"{Constants.jaffaBBCode}x{GameStart.player.jaffaCakes}";
+		
+		if (GameStart.player.goodKeys > 0)
+			hud += $"{Constants.goodKeyBBCode}";
+		
+		if (GameStart.player.badKeys > 0)
+			hud += $"{Constants.badKeyBBCode}";
 
-		if (GameStart.player.jaffaCakes > 0)
-		{
-			hud += $"{Constants.jaffaBBCode}x{GameStart.player.jaffaCakes}";
-		}
+		
 		
 		
 		BbcodeText = hud;
