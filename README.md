@@ -5,5 +5,5 @@
 [![Donate to Charity](https://github.com/omegaleo/yogscastjam2021/blob/main/Jingle_Jam_2021_Panel_Blue.png?raw=true)](https://tiltify.com/@0megaleo/omega-leo-x-jinglejam)
 
 ## Assets used
-Music: Retro Reggae.ogg - [Kenney Game Assets Pack 1](https://kenney.itch.io/kenney-game-assets-1)
+Music: Retro Reggae.ogg - [Kenney Game Assets Pack 1](https://kenney.itch.io/kenney-game-assets-1)  
 Font: [Atari Classic by Marc Simonson](http://members.bitstream.net/marksim/atarimac/fonts.html)
