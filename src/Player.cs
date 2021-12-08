@@ -297,6 +297,7 @@ public class Player : KinematicBody2D
 				if (collisionName.Contains("JaffaCake"))
 				{
 					jaffaCakes++;
+					GameStart.sfx.PlaySFX(Constants.pickup);
 					((Node) collision.Collider).QueueFree();
 				}
 
@@ -308,6 +309,7 @@ public class Player : KinematicBody2D
 
 				if (collisionName.Contains("Key"))
 				{
+					GameStart.sfx.PlaySFX(Constants.pickup);
 					if (collisionName.Contains("Bad"))
 					{
 						badKeys++;
@@ -324,6 +326,7 @@ public class Player : KinematicBody2D
 				{
 					if (collisionName.Contains("Bad") && badKeys > 0)
 					{
+						GameStart.sfx.PlaySFX(Constants.doorOpen);
 						badKeys--;
 						((Node) collision.Collider).QueueFree();
 						respawnPoint = GlobalPosition;
@@ -336,6 +339,7 @@ public class Player : KinematicBody2D
 
 					if (collisionName.Contains("Good") && goodKeys > 0)
 					{
+						GameStart.sfx.PlaySFX(Constants.doorOpen);
 						goodKeys--;
 						((Node) collision.Collider).QueueFree();
 						respawnPoint = GlobalPosition;
@@ -350,7 +354,7 @@ public class Player : KinematicBody2D
 				if (collisionName.Contains("Death") && !waitingToRespawn)
 				{
 					hearts--;
-
+					GameStart.sfx.PlaySFX(Constants.hurt);
 					waitingToRespawn = true;
 					if (hearts == 0)
 					{
@@ -369,6 +373,7 @@ public class Player : KinematicBody2D
 
 					if (portal != null)
 					{
+						GameStart.sfx.PlaySFX(Constants.teleport);
 						if (portal.teleportToStart)
 						{
 							GlobalPosition = respawnPoint;

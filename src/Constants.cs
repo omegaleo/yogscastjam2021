@@ -32,5 +32,11 @@ Press any key to continue[/center]";
 
         public const string startingMessage1 = @"[center]Lewis and Simon have been sent to opposite dimensions after an accident with one of their experiments in YogLabs, your goal is to help them get back together in their original dimension.[/center]
 [right]Press <Z> to Continue[/right]";
+
+        public const string buttonPress = "sfx/button.wav";
+        public const string pickup = "sfx/pickup.wav";
+        public const string hurt = "sfx/hurt.wav";
+        public const string teleport = "sfx/teleport.wav";
+        public const string doorOpen = "sfx/metalLatch.ogg";
     }
 }

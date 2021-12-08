@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using GoodAndEvil;
 
 public class StartGame : Button
 {
@@ -8,5 +9,6 @@ public class StartGame : Button
 		base._Pressed();
 
 		UI.StartGame();
+		GameStart.sfx.PlaySFX(Constants.buttonPress);
 	}
 }

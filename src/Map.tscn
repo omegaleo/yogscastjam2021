@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://Player.cs" type="Script" id=1]
 [ext_resource path="res://messageFont.tres" type="DynamicFont" id=2]
@@ -30,6 +30,8 @@
 [ext_resource path="res://Victory.cs" type="Script" id=28]
 [ext_resource path="res://textures/TitleScreen.png" type="Texture" id=29]
 [ext_resource path="res://StartGame.cs" type="Script" id=30]
+[ext_resource path="res://SFX.cs" type="Script" id=31]
+[ext_resource path="res://sfx/button.wav" type="AudioStream" id=32]
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 14.5, 10.25 )
@@ -1053,6 +1055,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="JingleJam" type="TextureButton" parent="UI/TitleScreen"]
+margin_left = 449.0
+margin_top = 307.0
+margin_right = 637.0
+margin_bottom = 359.0
+
 [node name="RespawnPoint" type="StaticBody2D" parent="."]
 position = Vector2( -410, -586 )
 script = ExtResource( 17 )
@@ -1074,3 +1082,8 @@ stream = ExtResource( 23 )
 volume_db = -47.932
 autoplay = true
 script = ExtResource( 24 )
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 32 )
+volume_db = -25.0
+script = ExtResource( 31 )

@@ -8,6 +8,7 @@ public class GameStart : Node2D
 	// private string b = "text";
 
 	public static Music music;
+	public static SFX sfx;
 
 	public static Player player;
 
@@ -22,6 +23,7 @@ public class GameStart : Node2D
 		OS.WindowSize = new Vector2(1280, 720);
 		player = GetNode<Player>("Player");
 		music = GetNode<Music>("Music");
+		sfx = GetNode<SFX>("SFX");
 		bad = GetNode<ToggleMap>("Bad");
 		good = GetNode<ToggleMap>("Good");
 	}

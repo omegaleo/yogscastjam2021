@@ -16,6 +16,7 @@ public class Victory : Control
 			if (Input.IsActionPressed("Action"))
 			{
 				_popup.Hide();
+				GetTree().ReloadCurrentScene();
 			}
 		}
 	}
