@@ -13,7 +13,9 @@ public class GameStart : Node2D
 
 	public static ToggleMap good;
 	public static ToggleMap bad;
-	
+	public static int jaffaCakeCount = 4;
+
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{

@@ -23,5 +23,14 @@ Requires " + badKeyBBCode + @"x1 to open.
         public const string goodDoorLockedText = @"[center]Door is locked!
 Requires " + goodKeyBBCode + @"x1 to open.
         [right]Press <Z> to Continue[/right]";
+
+        public const string VictoryText = @"
+[center]Congratulations!
+You reunited Lewis and Simon!
+You collected {0} out of {1} Jaffa Cakes!
+Press any key to continue[/center]";
+
+        public const string startingMessage1 = @"[center]Lewis and Simon have been sent to opposite dimensions after an accident with one of their experiments in YogLabs, your goal is to help them get back together in their original dimension.[/center]
+[right]Press <Z> to Continue[/right]";
     }
 }

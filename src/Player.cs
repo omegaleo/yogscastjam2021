@@ -255,6 +255,11 @@ public class Player : KinematicBody2D
 	private bool messageSent = false;
 	private bool waitingToRespawn = false;
 
+	bool CanMove()
+	{
+		return !UI.dialogue.IsPopupOpen && !UI.gameOver.GameOverShowing && !UI.victory.Showing && !UI.titleScreen.Visible;
+	}
+	
 	public override void _PhysicsProcess(float delta)
 	{
 		if (GameStart.good.Visible)
@@ -266,7 +271,7 @@ public class Player : KinematicBody2D
 			sprite.Texture = GD.Load<Texture>("res://textures/characters/Lewis.png");
 		}
 		
-		if (!UI.dialogue.IsPopupOpen && !UI.gameOver.GameOverShowing)
+		if (CanMove())
 		{
 			GetInput();
 			velocity = MoveAndSlide(velocity);
@@ -373,6 +378,11 @@ public class Player : KinematicBody2D
 							GlobalPosition = portal.positionToTeleport;
 						}
 					}
+				}
+
+				if (collisionName.Equals("Lewis") || collisionName.Equals("Simon"))
+				{
+					UI.victory.ShowVictory();
 				}
 			}
 			else

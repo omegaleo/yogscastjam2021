@@ -1,11 +1,13 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using GoodAndEvil;
 
 public class DialogueManager : Control
 {
 	private Popup _popup;
 	private RichTextLabel _label;
+	public List<string> messages;
 	
 	
 	public override void _Input(InputEvent @event)
@@ -14,9 +16,19 @@ public class DialogueManager : Control
 
 		if (Input.IsActionPressed("Action"))
 		{
-			_popup.Hide();
+			if (messages.Count == 0)
+				_popup.Hide();
+			else
+			{
+				messages.RemoveAt(0);
+				if (messages.Count == 0)
+					_popup.Hide();
+				else
+				{
+					ShowDialogue(messages[0]);
+				}
+			}
 		}
-			
 	}
 
 	public bool IsPopupOpen
@@ -29,26 +41,41 @@ public class DialogueManager : Control
 		base._Ready();
 		_popup = GetNode<Popup>("Popup");
 		_label = GetNode<RichTextLabel>("Popup/Text");
+		messages = new List<string>();
 	}
 
+	public void AddToList(List<string> text)
+	{
+		messages.AddRange(text);
+		
+		ShowDialogue(messages[0]);
+	}
+	
+	public void AddToList(string text)
+	{
+		messages.Add(text);
+		
+		ShowDialogue(messages[0]);
+	}
+	
 	public void ShowTutorialText()
 	{
-		ShowDialogue(Constants.tutorialText);
+		AddToList(Constants.tutorialText);
 	}
 
 	public void ShowSecondTutorialText()
 	{
-		ShowDialogue(Constants.tutorialSecondText);
+		AddToList(Constants.tutorialSecondText);
 	}
 	
 	public void ShowLockedGoodDoorText()
 	{
-		ShowDialogue(Constants.goodDoorLockedText);
+		AddToList(Constants.goodDoorLockedText);
 	}
 	
 	public void ShowLockedBadDoorText()
 	{
-		ShowDialogue(Constants.badDoorLockedText);
+		AddToList(Constants.badDoorLockedText);
 	}
 	
 	public void ShowDialogue(string text)

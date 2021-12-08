@@ -1,9 +1,11 @@
 using Godot;
 using System;
+using GoodAndEvil;
 
-public class GameOver : Control
+public class Victory : Control
 {
 	private Popup _popup;
+	private RichTextLabel _text;
 	
 	public override void _Input(InputEvent @event)
 	{
@@ -14,12 +16,11 @@ public class GameOver : Control
 			if (Input.IsActionPressed("Action"))
 			{
 				_popup.Hide();
-				GetTree().ReloadCurrentScene();
 			}
 		}
 	}
 	
-	public bool GameOverShowing
+	public bool Showing
 	{
 		get { return _popup.Visible; }
 	}
@@ -28,10 +29,12 @@ public class GameOver : Control
 	{
 		base._Ready();
 		_popup = GetNode<Popup>("Popup");
+		_text = _popup.GetNode<RichTextLabel>("RichTextLabel");
 	}
 	
-	public void ShowGameOver()
+	public void ShowVictory()
 	{
 		_popup.Popup_();
+		_text.BbcodeText = string.Format(Constants.VictoryText, GameStart.player.jaffaCakes, GameStart.jaffaCakeCount);
 	}
 }
